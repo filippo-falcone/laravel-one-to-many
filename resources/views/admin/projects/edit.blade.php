@@ -42,6 +42,18 @@
             @enderror
         </div>
         <div class="form-floating mb-3">
+            <select class="form-select @error('type_id') is-invalid @enderror" id="floatingTypeId" name="type_id">
+                <option value="">Select a type</option>
+                @foreach ($types as $type)
+                    <option @selected($type->id == old('type_id', $project->type_id)) value="{{ $type->id }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+            <label for="floatingTypeId">Type</label>
+            @error('type_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-floating mb-3">
             <textarea class="form-control @error('summary') is-invalid @enderror" name="summary" rows="9"
                 placeholder="Leave a summary here" id="floatingSummary">{{ old('summary', $project->summary) }}</textarea>
             <label for="floatingSummary">Summary</label>
